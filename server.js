@@ -11,10 +11,11 @@ const { handleImage, handleApiCall } = require('./controllers/image')
 const db = knex({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
-      user : 'postgres',
-      password : 'pass',
-      database : 'DetectifAI-db'
+      host : 'ep-square-union-a2fx0err.eu-central-1.aws.neon.tech',
+      user : 'DetectifAI-db_owner',
+      password : 'O8iMXK1bkvgF',
+      database : 'DetectifAI-db',
+      ssl: true
     }
   });
 
