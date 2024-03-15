@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 const { handleRegister } = require('./controllers/register') 
 const { handleSignIn } = require('./controllers/signIn')
 const { handleProfile } = require('./controllers/profile')
-const { handleImage } = require('./controllers/image')
+const { handleImage, handleApiCall } = require('./controllers/image')
 
 const db = knex({
     client: 'pg',
@@ -46,9 +46,7 @@ const database = {
     ]
 }
 
-app.get('/', (req, res)=> {
-    res.send(database.users)
-})
+app.get('/', (req, res)=> {res.send(database.users)})
 
 app.post('/signin', handleSignIn(db, bcrypt))
 
@@ -57,6 +55,8 @@ app.post('/register', handleRegister(db, bcrypt, saltRounds))
 app.get('/profile/:id', handleProfile(db))
 
 app.put('/image', handleImage(db))
+
+app.post('/imageurl', handleApiCall)
 
 app.listen(3000, ()=> {
     console.log('App is running on port 3000')
