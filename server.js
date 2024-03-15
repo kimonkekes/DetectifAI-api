@@ -25,37 +25,12 @@ app.use(cors())
 
 const saltRounds = 10;
 
-const database = {
-    users: [
-        {
-            id: '123',
-            name: 'John',
-            email: 'john@gmail.com',
-            password: 'mclane',
-            entries: 0,
-            joined: new Date()
-        },
-        {
-            id: '124',
-            name: 'Sally',
-            email: 'sally@gmail.com',
-            password: 'lewis',
-            entries: 0,
-            joined: new Date()
-        }
-    ]
-}
 
-app.get('/', (req, res)=> {res.send(database.users)})
-
+app.get('/', (req, res)=> {res.send(db.users)})
 app.post('/signin', handleSignIn(db, bcrypt))
-
 app.post('/register', handleRegister(db, bcrypt, saltRounds))
-
 app.get('/profile/:id', handleProfile(db))
-
 app.put('/image', handleImage(db))
-
 app.post('/imageurl', handleApiCall)
 
 app.listen(3000, ()=> {
