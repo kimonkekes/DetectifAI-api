@@ -11,10 +11,10 @@ const { handleImage, handleApiCall } = require('./controllers/image')
 const db = knex({
     client: 'pg',
     connection: {
-      host : 'ep-square-union-a2fx0err.eu-central-1.aws.neon.tech',
-      user : 'DetectifAI-db_owner',
-      password : 'O8iMXK1bkvgF',
-      database : 'DetectifAI-db',
+      host : process.env.DATABASE_URL,
+      user : process.env.DATABASE_USER,
+      password : process.env.DATABASE_PASS,
+      database :  process.env.DATABASE_NAME,
       ssl: true
     }
   });
@@ -34,6 +34,6 @@ app.get('/profile/:id', handleProfile(db))
 app.put('/image', handleImage(db))
 app.post('/imageurl', handleApiCall)
 
-app.listen(3000, ()=> {
-    console.log('App is running on port 3000')
+app.listen(10000, ()=> {
+    console.log('App is running on port 10000')
 })
